@@ -1,6 +1,6 @@
 This is serial-read (Program.cs), wherein I perform a C#/.NET read of the indicated
 port on the Raspberry Pi.
-
+![](doc/c#GPSdevReadOnPi.gif)
 This is a prelude to a full-blown GPS system which will read GPS messages from a 
 NEO-6 u-blox type device, streaming NMEA messages.
 
