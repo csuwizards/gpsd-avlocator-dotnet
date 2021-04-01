@@ -1,6 +1,6 @@
 # serial-read
 Enable File Integrity Monitoring on directory trees
-![](doc/c#GPSdevReadOnPi.gif)
+![](doc/csGPSdevReadOnPi.gif)
 
 This is serial-read (Program.cs), wherein I perform a C#/.NET read of the indicated
 port on the Raspberry Pi.
