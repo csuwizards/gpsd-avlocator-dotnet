@@ -15,8 +15,3 @@ The original inspiration was created/saved elsewhere in
 github.com/jpsthecelt, initially as a python program.
 
 3.30.21-jps
-
-Another experiment in the subdirectory below is called serialDataRx. This uses a 'handler' to grab data a byte at a time (based on DTR cycling). It's an 
-alternate method of grabbing the data.
-
-4.3.21-jps
