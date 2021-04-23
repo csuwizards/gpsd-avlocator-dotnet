@@ -1,4 +1,4 @@
-# serial-read
+# avlocator-dotnet (was serial-read)
 This is serial-read (Program.cs), wherein I perform a C#/.NET read of the indicated
 port on the Raspberry Pi.
 
