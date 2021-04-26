@@ -3,24 +3,21 @@ using System.IO.Ports;
 using System.Collections.Generic;
 using System.Threading.Channels;
 using System.Threading.Tasks;
-using MsgProcessor;
 
 namespace serial_read
 {
     class Program
     {
      static SerialPort _serialPort;
-     public static async Task Main(string[] args)
+     static string port = "/dev/ttyUSB0";
+     static async Task Main(string[] args)
      {
-      bool notStop = true;
-	    var messageQueue = Channel.CreateUnbounded<string>();
-	    var messageReverser = new StringReverser(messageQueue);
+      bool notDone = true;
+	    var msgQueue = Channel.CreateUnbounded<string>();
+      
 
-	    CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-	    messageReverser.StartProcessing(cancellationTokenSource.Token);
-
-       Console.Write("Port no: ");
-       string port = Console.ReadLine();
+      //  Console.Write("Port no: ");
+      //  string port = Console.ReadLine();
     //    Console.Write("baudrate: ");
        string baudrate = "9600";
    
@@ -32,32 +29,44 @@ namespace serial_read
        _serialPort.WriteTimeout = 1500;
        _serialPort.Open();
 
-       do {
-         Read();
-       } while (notStop);
+      _ = Task.Factory.StartNew(async () => 
+        {
+          // for (int i=0; i<50; i++) {
+          while (notDone) {
+                string bufr = _serialPort.ReadLine();
+                Console.WriteLine($"read & sent: {bufr}");
+              await msgQueue.Writer.WriteAsync(bufr);
+          } 
+          msgQueue.Writer.Complete();
+        });
 
+await foreach (var item in msgQueue.Reader.ReadAllAsync())
+{
+  Console.WriteLine($"Received: {item}");
+  // await Task.Delay(250);
+}
        _serialPort.Close();
      }
    
-    public static void Read() {
-        Console.WriteLine($"Thread={Thread.CurrentThread.ManagedThreadId} Write a sentence and see each word reversed: ");
-        var msg = Console.ReadLine();
-        Console.WriteLine("");
-    
-        foreach (var s in msg.Split())
-        {
-        	  await messageReverser.QueueForProcessing(s, cancellationTokenSource.Token);
-        }
-     }
+    // public static Read() {
+        // Console.WriteLine($"Thread={Thread.CurrentThread.ManagedThreadId} Write a sentence and see each word reversed: ");
+        // var msg = Console.ReadLine();
+        // Console.WriteLine("");
+    // 
+        // foreach (var s in msg.Split())
+        // {
+        	  // await messageReverser.QueueForProcessing(s, cancellationTokenSource.Token);
+        // }
+    //  }
 
-     public static void oldRead()
-     {
-       try
-       {
-         string message = _serialPort.ReadLine();
-         Console.WriteLine(message);
-       }
-       catch (TimeoutException) { }
-     }
+    //  public static void oldRead()
+    //  {
+      //  try
+      //  {
+        //  string message = _serialPort.ReadLine();
+        //  Console.WriteLine(message);
+      //  }
+      //  catch (TimeoutException) { }
+    //  }
    }
 }
