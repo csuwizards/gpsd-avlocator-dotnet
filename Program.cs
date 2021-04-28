@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO.Ports;
+//using MsgProcessor;
 
 namespace serial_read
 {
@@ -9,6 +10,7 @@ namespace serial_read
      static void Main(string[] args)
      {
       bool notStop = true;
+      MsgProcessor msp = new MsgProcessor();
 
        Console.Write("Port no: ");
        string port = Console.ReadLine();
