@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO.Ports;
-//using MsgProcessor;
 
 namespace serial_read
 {
@@ -10,9 +9,8 @@ namespace serial_read
      static void Main(string[] args)
      {
       bool notStop = true;
-      MsgProcessor msp = new MsgProcessor();
 
-       Console.Write("Port no: ");
+      //  Console.Write("Port no: ");
        string port = Console.ReadLine();
     //    Console.Write("baudrate: ");
        string baudrate = "9600";
@@ -25,9 +23,9 @@ namespace serial_read
        _serialPort.WriteTimeout = 1500;
        _serialPort.Open();
 
-       do {
+       while (notStop) {
          Read();
-       } while (notStop);
+       } 
 
        _serialPort.Close();
      }
