@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.IO.Ports;
 using System.Collections.Generic;
 using System.Threading.Channels;
@@ -26,17 +27,22 @@ namespace serial_read
 
       _ = Task.Factory.StartNew(async () => 
         {
-          while (notDone) {
-                string bufr = _serialPort.ReadLine();
-                Console.WriteLine($"forwarded: {bufr.Split(",")[0]}");
-                await msgQueue.Writer.WriteAsync(bufr);
-          } 
+          try {
+            while (notDone) {
+                  string bufr = _serialPort.ReadLine();
+                  // Console.WriteLine($"forwarded: {bufr.Split(",")[0]}");
+                  await msgQueue.Writer.WriteAsync(bufr);
+            } 
+          }
+          catch {
+            // file.Close();
+          }
           msgQueue.Writer.Complete();
         });
 
       await foreach (var item in msgQueue.Reader.ReadAllAsync())
       {
-        Console.WriteLine($"Adding to DB: {item}");
+        Console.WriteLine($"+ {item}");
         await Task.Delay(100);
       }
        _serialPort.Close();
