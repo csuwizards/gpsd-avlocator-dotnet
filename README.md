@@ -1,4 +1,4 @@
-# serial-read
+# avlocator-dotnet (was serial-read)
 This is serial-read (Program.cs), wherein I perform a C#/.NET read of the indicated
 port on the Raspberry Pi.
 
@@ -15,8 +15,3 @@ The original inspiration was created/saved elsewhere in
 github.com/jpsthecelt, initially as a python program.
 
 3.30.21-jps
-
-Another experiment in the subdirectory below is called serialDataRx. This uses a 'handler' to grab data a byte at a time (based on DTR cycling). It's an 
-alternate method of grabbing the data.
-
-4.3.21-jps
