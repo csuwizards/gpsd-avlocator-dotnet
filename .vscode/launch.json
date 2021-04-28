@@ -11,7 +11,11 @@
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
             "program": "${workspaceFolder}/bin/Debug/net5.0/serial-read.dll",
+<<<<<<< HEAD
             "args": [],
+=======
+            "args": ["-f", "savedNMEAmsgs.csv"],
+>>>>>>> refs/remotes/origin/master
             "cwd": "${workspaceFolder}",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
             "console": "internalConsole",
