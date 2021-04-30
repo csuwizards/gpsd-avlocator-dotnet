@@ -1,31 +1,26 @@
 ﻿using System;
-<<<<<<< HEAD
 // using System.IO;
 using System.IO.Ports;
 using System.Collections.Generic;
 using System.Threading.Channels;
 using System.Threading.Tasks;
-=======
 using System.Text;
 using System.IO;
 using System.IO.Ports;
 // using NMEAParser;
 // using NMEAParser.Exceptions;
->>>>>>> refs/remotes/origin/master
 
 namespace serial_read
 {
     class Program
     {
      static SerialPort _serialPort;
-<<<<<<< HEAD
      static string port = "/dev/ttyUSB0";
      static async Task Main(string[] args)
      {
       bool notDone = true;
 	    var msgQueue = Channel.CreateUnbounded<string>();
       string baudrate = "9600";
-=======
      static readonly NmeaParser _parser = new NmeaParser();
      static void Main(string[] args)
      {
@@ -57,7 +52,6 @@ namespace serial_read
 
                string port = Console.ReadLine();
                string baudrate = "9600";
->>>>>>> refs/remotes/origin/master
    
                // Create a new SerialPort on indicated serial device (port)
                _serialPort = new SerialPort(port, int.Parse(baudrate));
@@ -67,7 +61,6 @@ namespace serial_read
                _serialPort.WriteTimeout = 1500;
                _serialPort.Open();
 
-<<<<<<< HEAD
       _ = Task.Factory.StartNew(async () => 
         {
           try {
@@ -89,7 +82,6 @@ namespace serial_read
         await Task.Delay(100);
       }
        _serialPort.Close();
-=======
                while (notStop) {
                  Read();
                } 
@@ -100,7 +92,6 @@ namespace serial_read
             Console.WriteLine(e.Message);
         }
 
->>>>>>> refs/remotes/origin/master
      }
    }
  }
