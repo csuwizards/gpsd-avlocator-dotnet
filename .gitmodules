@@ -1,0 +1,6 @@
+[submodule "serialDataRx"]
+	path = serialDataRx
+	url = https://github.com/jpsthecelt/serialDataRx.git
+[submodule "id-serialports"]
+	path = id-serialports
+	url = https://github.com/jpsthecelt/id-serialports.git
